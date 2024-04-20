@@ -1,0 +1,340 @@
+version: "3.1"
+
+stories:
+
+- story: Fallback rule
+  steps:
+  - intent: nlu_fallback
+  - action: action_custom_fallback
+
+- story: Language preference - English
+  steps:
+    - intent: start
+    - action: utter_greet
+    - intent: prefer_language
+    - slot_was_set:
+        - user_prefer_language: english
+    - slot_was_set:
+        - user_prefer_language: ඉංග්‍රීසි
+    - action: utter_prefer_language
+
+- story: Language preference - Sinhala
+  steps:
+    - intent: start
+    - action: utter_greet
+    - intent: prefer_language
+    - slot_was_set:
+        - user_prefer_language: sinhala
+    - slot_was_set:
+        - user_prefer_language: සිංහල
+    - action: utter_prefer_language
+
+- story: User mentions potato late blight - English
+  steps:
+    - intent: p_late_blight_en
+    - slot_was_set:
+        - crop_disease: potato late blight
+    - slot_was_set:
+        - crop_disease: late blight
+    - action: utter_crop_disease_info_eng
+    - action: utter_ask_preventive_measures_english
+    - intent: affirm_english
+    - slot_was_set:
+        - crop_disease: potato late blight
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_location_english
+
+
+- story: User mentions potato late blight - Sinhala
+  steps:
+    - intent: p_late_blight_sin
+    - slot_was_set:
+        - crop_disease: අර්තාපල් පශ්චිම අංගමාරය
+    - slot_was_set:
+        - crop_disease: පශ්චිම අංගමාරය
+    - action: utter_crop_disease_info_sin
+    - action: utter_ask_preventive_measures_sinhala
+    - intent: affirm_sinhala
+    - slot_was_set:
+        - crop_disease: අර්තාපල් පශ්චිම අංගමාරය
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_prevention_explanation_sin
+
+- story: User mentions potato early blight - English
+  steps:
+    - intent: p_early_blight_en
+    - slot_was_set:
+        - crop_disease: potato early blight
+    - slot_was_set:
+        - crop_disease: early blight
+    - action: utter_crop_disease_info_eng
+    - action: utter_ask_preventive_measures_english
+    - intent: affirm_english
+    - slot_was_set:
+        - crop_disease: potato early blight
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_location_english
+
+- story: User mentions potato early blight - Sinhala
+  steps:
+    - intent: p_early_blight_sin
+    - slot_was_set:
+        - crop_disease: අර්තාපල් පූර්ව අංගමාරය
+    - slot_was_set:
+        - crop_disease: පූර්ව අංගමාරය
+    - action: utter_crop_disease_info_sin
+    - action: utter_ask_preventive_measures_sinhala
+    - intent: affirm_sinhala
+    - slot_was_set:
+        - crop_disease: අර්තාපල් පූර්ව අංගමාරය
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_prevention_explanation_sin
+
+- story: User mentions rice brown spot - English
+  steps:
+    - intent: r_brown_spot_en
+    - slot_was_set:
+        - crop_disease: rice brown spot
+    - slot_was_set:
+        - crop_disease: brown spot
+    - action: utter_crop_disease_info_eng
+    - action: utter_ask_preventive_measures_english
+    - intent: affirm_english
+    - slot_was_set:
+        - crop_disease: rice brown spot
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_location_english
+
+- story: User mentions rice brown spot - Sinhala
+  steps:
+    - intent: r_brown_spot_sin
+    - slot_was_set:
+        - crop_disease: සහල් දුඹුරු පුල්ලි
+    - slot_was_set:
+        - crop_disease: දුඹුරු පුල්ලි
+    - action: utter_crop_disease_info_sin
+    - action: utter_ask_preventive_measures_sinhala
+    - intent: affirm_sinhala
+    - slot_was_set:
+        - crop_disease: සහල් දුඹුරු පුල්ලි
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_prevention_explanation_sin
+
+- story: User mentions rice bacterial leaf blight - English
+  steps:
+    - intent: r_bacterial_blight_en
+    - slot_was_set:
+        - crop_disease: rice bacterial leaf blight
+    - slot_was_set:
+        - crop_disease: bacterial leaf blight
+    - action: utter_crop_disease_info_eng
+    - action: utter_ask_preventive_measures_english
+    - intent: affirm_english
+    - slot_was_set:
+        - crop_disease: rice bacterial leaf blight
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_location_english
+
+- story: User mentions rice bacterial leaf blight - Sinhala
+  steps:
+    - intent: r_bacterial_blight_sin
+    - slot_was_set:
+        - crop_disease: සහල් බැක්ටීරියා කොළ අංගමාරය
+    - slot_was_set:
+        - crop_disease: බැක්ටීරියා කොළ අංගමාරය
+    - action: utter_crop_disease_info_sin
+    - action: utter_ask_preventive_measures_sinhala
+    - intent: affirm_sinhala
+    - slot_was_set:
+        - crop_disease: සහල් බැක්ටීරියා කොළ අංගමාරය
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_prevention_explanation_sin
+
+- story: User mentions rice blast - English
+  steps:
+    - intent: r_blast_en
+    - slot_was_set:
+        - crop_disease: rice blast
+    - slot_was_set:
+        - crop_disease: blast
+    - action: utter_crop_disease_info_eng
+    - action: utter_ask_preventive_measures_english
+    - intent: affirm_english
+    - slot_was_set:
+        - crop_disease: rice blast
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_location_english
+
+- story: User mentions rice blast - Sinhala
+  steps:
+    - intent: r_blast_sin
+    - slot_was_set:
+        - crop_disease: කොළ පාලුව
+    - action: utter_crop_disease_info_sin
+    - action: utter_ask_preventive_measures_sinhala
+    - intent: affirm_sinhala
+    - slot_was_set:
+        - crop_disease: කොළ පාලුව
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_prevention_explanation_sin
+
+
+- story: User mentions tea leaf spot - English
+  steps:
+    - intent: t_leaf_spot_en
+    - slot_was_set:
+        - crop_disease: tea leaf spot
+    - slot_was_set:
+        - crop_disease: leaf spot
+    - action: utter_crop_disease_info_eng
+    - action: utter_ask_preventive_measures_english
+    - intent: affirm_english
+    - slot_was_set:
+        - crop_disease: tea leaf spot
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_location_english
+
+- story: User mentions tea leaf spot - Sinhala
+  steps:
+    - intent: t_leaf_spot_sin
+    - slot_was_set:
+        - crop_disease: තේ කොළ පැල්ලම
+    - slot_was_set:
+        - crop_disease: කොළ පැල්ලම
+    - action: utter_crop_disease_info_sin
+    - action: utter_ask_preventive_measures_sinhala
+    - intent: affirm_sinhala
+    - slot_was_set:
+        - crop_disease: තේ කොළ පැල්ලම
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_prevention_explanation_sin
+
+- story: User mentions tea grey blight - English
+  steps:
+    - intent: t_grey_blight_en
+    - slot_was_set:
+        - crop_disease: tea grey blight
+    - slot_was_set:
+        - crop_disease: grey blight
+    - action: utter_crop_disease_info_eng
+    - action: utter_ask_preventive_measures_english
+    - intent: affirm_english
+    - slot_was_set:
+        - crop_disease: tea grey blight
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_location_english
+
+- story: User mentions tea grey blight - Sinhala
+  steps:
+    - intent: t_grey_blight_sin
+    - slot_was_set:
+        - crop_disease: තේ අළු අංගමාරය
+    - slot_was_set:
+        - crop_disease: අළු අංගමාරය
+    - action: utter_crop_disease_info_sin
+    - action: utter_ask_preventive_measures_sinhala
+    - intent: affirm_sinhala
+    - slot_was_set:
+        - crop_disease: තේ අළු අංගමාරය
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_prevention_explanation_sin
+
+- story: User mentions tea white spot - English
+  steps:
+    - intent: t_white_spot_en
+    - slot_was_set:
+        - crop_disease: tea white spot
+    - slot_was_set:
+        - crop_disease: white spot
+    - action: utter_crop_disease_info_eng
+    - action: utter_ask_preventive_measures_english
+    - intent: affirm_english
+    - slot_was_set:
+        - crop_disease: tea white spot
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_location_english
+
+- story: User mentions tea white spot - Sinhala
+  steps:
+    - intent: t_white_spot_sin
+    - slot_was_set:
+        - crop_disease: තේ සුදු පැල්ලම
+    - slot_was_set:
+        - crop_disease: සුදු පැල්ලම
+    - action: utter_crop_disease_info_sin
+    - action: utter_ask_preventive_measures_sinhala
+    - intent: affirm_sinhala
+    - slot_was_set:
+        - crop_disease: තේ සුදු පැල්ලම
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_prevention_explanation_sin
+
+- story: User mentions tea brown blight - English
+  steps:
+    - intent: t_brown_blight_en
+    - slot_was_set:
+        - crop_disease: tea brown blight
+    - slot_was_set:
+        - crop_disease: brown blight
+    - action: utter_crop_disease_info_eng
+    - action: utter_ask_preventive_measures_english
+    - intent: affirm_english
+    - slot_was_set:
+        - crop_disease: tea brown blight
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_location_english
+
+- story: User mentions tea brown blight - Sinhala
+  steps:
+    - intent: t_brown_blight_sin
+    - slot_was_set:
+        - crop_disease: තේ දුඹුරු අංගමාරය
+    - slot_was_set:
+        - crop_disease: දුඹුරු අංගමාරය
+    - action: utter_crop_disease_info_sin
+    - action: utter_ask_preventive_measures_sinhala
+    - intent: affirm_sinhala
+    - slot_was_set:
+        - crop_disease: තේ දුඹුරු අංගමාරය
+    - action: utter_affirm_preventive_measures
+    - action: utter_ask_prevention_explanation_sin
+
+- story: User gives the location
+  steps:
+    - intent: city
+    - action: action_weather_api
+    - action: utter_ask_prevention_explanation_eng
+
+- story: User asks crop rotation - English
+  steps:
+    - intent: crop_rotation_en
+    - action: utter_crop_rotation_eng
+
+- story: User asks crop rotation - Sinhala
+  steps:
+    - intent: crop_rotation_sin
+    - action: utter_crop_rotation_sin
+
+- story: User asks disease free tuber - English
+  steps:
+    - intent: disease_free_tuber_en
+    - action: utter_disease_free_tuber_en
+
+- story: User asks disease free tuber - Sinhala
+  steps:
+    - intent: disease_free_tuber_sin
+    - action: utter_disease_free_tuber_sin
+
+- story: does not ask for preventive measures - English
+  steps:
+    - intent: deny_english
+    - action: utter_deny_preventive_measures_en
+
+- story: does not ask for preventive measures - Sinhala
+  steps:
+    - intent: deny_sinhala
+    - action: utter_deny_preventive_measures_sin
+
+
+
+

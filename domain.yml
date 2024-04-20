@@ -1,0 +1,890 @@
+version: "3.1"
+
+intents:
+  - affirm_english
+  - affirm_sinhala
+  - deny_english
+  - deny_sinhala
+  - start
+  - prefer_language
+  - crop_rotation_en
+  - crop_rotation_sin
+  - disease_free_tuber_en
+  - disease_free_tuber_sin
+  - p_late_blight_en
+  - p_late_blight_sin
+  - p_early_blight_en
+  - p_early_blight_sin
+  - r_brown_spot_en
+  - r_brown_spot_sin
+  - r_bacterial_blight_en
+  - r_bacterial_blight_sin
+  - r_blast_en
+  - r_blast_sin
+  - t_leaf_spot_en
+  - t_leaf_spot_sin
+  - t_grey_blight_en
+  - t_grey_blight_sin
+  - t_white_spot_en
+  - t_white_spot_sin
+  - t_brown_blight_en
+  - t_brown_blight_sin
+  - city
+  - nlu_fallback
+
+entities:
+  - crop_disease
+  - preventive_measures
+  - user_prefer_language
+  - ask_preventive_measures
+
+slots:
+  crop_disease:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: crop_disease
+
+  preventive_measures:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: preventive_measures
+
+  user_prefer_language:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: user_prefer_language
+
+  ask_preventive_measures:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: ask_preventive_measures
+
+
+responses:
+  utter_greet:
+    - text: "Hello there! I am here to protect your crops...First of all, select the language you prefer
+       \n- English
+       \n- Sinhala
+
+    \n\nසුබ දිනක්! ඔබේ වගාවන් ආරක්ෂා කිරීමට මම උදවු කරන්න...මුලින්ම ඔබ කැමති භාෂාව තෝරන්න
+    \n- ඉංග්‍රීසි
+    \n- සිංහල"
+
+  utter_prefer_language:
+    - text: "Please enter 'english' or 'sinhala
+    \nකරුණාකර 'ඉංග්‍රීසි' හෝ 'සිංහල' ඇතුළත් කරන්න"
+
+    - condition:
+        - type: slot
+          name: user_prefer_language
+          value: english
+      text: "Okay now we are good to gooo...So tell me the crop disease that you want to know about? I am here to protect your crops"
+
+    - condition:
+        - type: slot
+          name: user_prefer_language
+          value: sinhala
+      text: "හරි එහෙනම්, ඔයාට දැනගන්න ඕන බෝග රෝගය මට කියන්න මම ඔයාගේ වගාවන් ආරක්ෂා කර දෙන්නම්"
+
+    - condition:
+        - type: slot
+          name: user_prefer_language
+          value: ඉංග්‍රීසි
+      text: "Okay now we are good to gooo...So tell me the crop disease that you want to know about? I am here to protect you crops <img src='https://webstockreview.net/images/clipart-wave-emoji-1.png'>"
+
+    - condition:
+        - type: slot
+          name: user_prefer_language
+          value: සිංහල
+      text: "හරි එහෙනම්, ඔයාට දැනගන්න ඕන බෝග රෝගය මට කියන්න මම ඔයාලගේ වගාවන් ආරක්ෂා කර දෙන්නම් <img src='https://webstockreview.net/images/clipart-wave-emoji-1.png'>"
+
+
+  utter_crop_disease_info_eng:
+    - text: "I currently do not have information about this crop disease"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: potato late blight
+      image: "https://www.agric.wa.gov.au/sites/gateway/files/Late%20blight%20tuber%20infection.jpg"
+      text: " Potato late blight is caused by 'Phytopthora infestans' and it affects potatoes causing dark lesions on 
+      leaves, stems, and tubers. The disease spreads in cool, wet conditions and is notorious for causing the Irish 
+      Potato Famine in the 19th century."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: late blight
+      image: "https://www.agric.wa.gov.au/sites/gateway/files/Late%20blight%20tuber%20infection.jpg"
+      text: " Potato late blight is caused by 'Phytopthora infestans' and it affects potatoes causing dark lesions on 
+      leaves, stems, and tubers. The disease spreads in cool, wet conditions and is notorious for causing the Irish 
+      Potato Famine in the 19th century."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: potato early blight
+      image: "https://omafra.gov.on.ca/IPM/images/potatoes/diseases/early-blight/potato_early-blight_08_zoom.jpg"
+      text: " Potato early blight is a fungal disease caused by 'Alternaria solani' and appears as small, dark brown 
+      lesions on potato leaves, starting from the bottom and spreading upward. The fungus survives in plant debris and 
+      soil, spreading through wind and rain. Warm and humid conditions encourage its development."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: early blight
+      image: "https://omafra.gov.on.ca/IPM/images/potatoes/diseases/early-blight/potato_early-blight_08_zoom.jpg"
+      text: " Potato early blight is a fungal disease caused by 'Alternaria solani' and appears as small, dark brown 
+      lesions on potato leaves, starting from the bottom and spreading upward. The fungus survives in plant debris and 
+      soil, spreading through wind and rain. Warm and humid conditions encourage its development."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: rice brown spot
+      image: "http://www.knowledgebank.irri.org/images/stories/brown-spot-3.jpg"
+      text: " Rice brown spot is a fungal disease caused by 'Cochliobolus miyabeanus'. It is characterized by small, 
+      dark brown to black lesions with yellow halos on the leaves. These lesions can coalesce, forming larger areas of 
+      damage. While rice brown spot may cause yield losses, it is generally considered a less severe disease compared 
+      to some other rice diseases."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: brown spot
+      image: "http://www.knowledgebank.irri.org/images/stories/brown-spot-3.jpg"
+      text: " Rice brown spot is a fungal disease caused by 'Cochliobolus miyabeanus'. It is characterized by small, 
+      dark brown to black lesions with yellow halos on the leaves. These lesions can coalesce, forming larger areas of 
+      damage. While rice brown spot may cause yield losses, it is generally considered a less severe disease compared 
+      to some other rice diseases."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: rice bacterial leaf blight
+      image: "https://apps.lucidcentral.org/pppw_v10/images/entities/rice_bacterial_leaf_blight_418/bacterialoozedry.jpg"
+      text: " Bacterial Leaf Blight is a bacterial disease caused by 'Xanthomonas oryzae pv.oryzae'. It is characterized by the 
+      development of water-soaked lesions with a blighting effect on the leaves. These lesions often have irregular 
+      shapes and can coalesce, leading to significant damage. "
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: bacterial leaf blight
+      image: "https://apps.lucidcentral.org/pppw_v10/images/entities/rice_bacterial_leaf_blight_418/bacterialoozedry.jpg"
+      text: " Bacterial Leaf Blight is a bacterial disease caused by 'Xanthomonas oryzae pv.oryzae'. It is characterized by the 
+      development of water-soaked lesions with a blighting effect on the leaves. These lesions often have irregular 
+      shapes and can coalesce, leading to significant damage. "
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: rice blast
+      image: "https://www.agric.wa.gov.au/sites/gateway/files/leafblast.jpg"
+      text: " Rice blast is a fungal disease of rice that can infect rice plants at any growth stage. It is caused by the 
+      fungal pathogen Pyricularia grisea or Pyricularia oryzae. The fungus causes lesions on the following parts of the 
+      rice plant: leaf, leaf collar, culm, culm nodes, panicle neck node and panicle1. A severe leaf blast infection 
+      reduces leaf area for grain fill, reducing grain yield."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: blast
+      image: "https://www.agric.wa.gov.au/sites/gateway/files/leafblast.jpg"
+      text: " Rice blast is a fungal disease of rice that can infect rice plants at any growth stage. It is caused by the 
+      fungal pathogen Pyricularia grisea or Pyricularia oryzae. The fungus causes lesions on the following parts of the 
+      rice plant: leaf, leaf collar, culm, culm nodes, panicle neck node and panicle1. A severe leaf blast infection 
+      reduces leaf area for grain fill, reducing grain yield."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: tea leaf spot
+      image: "https://www.kisansuvidha.com/wp-content/uploads/2017/07/algal-leaf-spot-of-tea.jpg"
+      text: " Leaf spot, caused by the alga Cephaleuros virescens, is a common issue in tea plants. It is most 
+      commonly identified by the orange-brown rust-colored leaf spots it creates. These spots typically appear entirely 
+      on the upper leaf surface, although some cases of spots on the undersides of infected leaves have been reported."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: leaf spot
+      image: "https://www.kisansuvidha.com/wp-content/uploads/2017/07/algal-leaf-spot-of-tea.jpg"
+      text: " Leaf spot, caused by the alga Cephaleuros virescens, is a common issue in tea plants. It is most 
+      commonly identified by the orange-brown rust-colored leaf spots it creates. These spots typically appear entirely 
+      on the upper leaf surface, although some cases of spots on the undersides of infected leaves have been reported."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: tea white spot
+      image: "https://apsjournals.apsnet.org/cms/10.1094/PDIS-09-20-1945-FE/asset/images/large/pdis-09-20-1945-fef6.jpeg"
+      text: " White spot (Phyllosticta theifolia) is a fungal disease that affects tea plants. It manifests as small, 
+      white or light-colored spots on tea leaves. These spots can impact the overall health of the plant and may affect tea quality."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: white spot
+      image: "https://apsjournals.apsnet.org/cms/10.1094/PDIS-09-20-1945-FE/asset/images/large/pdis-09-20-1945-fef6.jpeg"
+      text: " White spot (Phyllosticta theifolia) is a fungal disease that affects tea plants. It manifests as small, 
+      white or light-colored spots on tea leaves. These spots can impact the overall health of the plant and may affect tea quality."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: tea grey blight
+      image: "https://www.lsuagcenter.com/~/media/system/e/0/5/3/e05374f8044e7dc49940239234224299/figure%205jpg.jpg?h=1136&la=en&w=2256"
+      text: " Grey blight is a fungal disease that affects tea plants (Camellia sinensis). Small, oval, pale 
+      yellow-green spots initially appear on young tea leaves. These spots are often surrounded by a narrow, yellow 
+      zone. As the disease progresses, the spots turn brown or grey, forming concentric rings with scattered tiny black 
+      dots. Eventually, the affected tissue dries up and falls, leading to defoliation. Leaves of any age can be affected"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: grey blight
+      image: "https://www.lsuagcenter.com/~/media/system/e/0/5/3/e05374f8044e7dc49940239234224299/figure%205jpg.jpg?h=1136&la=en&w=2256"
+      text: " Grey blight is a fungal disease that affects tea plants (Camellia sinensis). Small, oval, pale 
+      yellow-green spots initially appear on young tea leaves. These spots are often surrounded by a narrow, yellow 
+      zone. As the disease progresses, the spots turn brown or grey, forming concentric rings with scattered tiny black 
+      dots. Eventually, the affected tissue dries up and falls, leading to defoliation. Leaves of any age can be affected"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: tea brown blight
+      image: "https://agritech.tnau.ac.in/crop_protection/images/tea_diseases/brown_blight_1.jpg"
+      text: " Brown blight is a tea disease characterized by small, oval, pale yellow-green spots on young tea leaves. 
+      These spots eventually turn brown or gray, forming concentric rings with tiny black dots. The affected tissue 
+      dries up and falls, leading to defoliation. Proper management and targeted treatments are essential to mitigate 
+      its impact on tea plants"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: brown blight
+      image: "https://agritech.tnau.ac.in/crop_protection/images/tea_diseases/brown_blight_1.jpg"
+      text: " Brown blight is a tea disease characterized by small, oval, pale yellow-green spots on young tea leaves. 
+      These spots eventually turn brown or gray, forming concentric rings with tiny black dots. The affected tissue 
+      dries up and falls, leading to defoliation. Proper management and targeted treatments are essential to mitigate 
+      its impact on tea plants"
+
+  utter_crop_disease_info_sin:
+    - text: "මෙම බෝග රෝගය පිළිබඳව දැනට මා සතුව තොරතුරු නොමැත"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: අර්තාපල් පශ්චිම අංගමාරය
+      image: "https://www.agric.wa.gov.au/sites/gateway/files/Late%20blight%20tuber%20infection.jpg"
+      text: " අර්තාපල් ප්‍රමාද අංගමාරය 'ෆයිටොප්තෝරා ඉන්ෆෙස්ටන්ස්' මගින් ඇති කරන අතර එය 
+      අර්තාපල් වලට බලපාන අතර කොළ, කඳන් සහ අල මත අඳුරු තුවාල ඇති කරයි. මෙම රෝගය සිසිල්, තෙත් තත්වයන් තුළ පැතිරෙන 
+      අතර 19 වන සියවසේ අයර්ලන්ත අර්තාපල් සාගතය ඇති කිරීමටද හේතු වී ඇත."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: පශ්චිම අංගමාරය
+      image: "https://www.agric.wa.gov.au/sites/gateway/files/Late%20blight%20tuber%20infection.jpg"
+      text: " අර්තාපල් ප්‍රමාද අංගමාරය 'ෆයිටොප්තෝරා ඉන්ෆෙස්ටන්ස්' මගින් ඇති කරන අතර එය 
+      අර්තාපල් වලට බලපාන අතර කොළ, කඳන් සහ අල මත අඳුරු තුවාල ඇති කරයි. මෙම රෝගය සිසිල්, තෙත් තත්වයන් තුළ පැතිරෙන 
+      අතර 19 වන සියවසේ අයර්ලන්ත අර්තාපල් සාගතය ඇති කිරීමටද හේතු වී ඇත."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: අර්තාපල් පූර්ව අංගමාරය
+      image: "https://omafra.gov.on.ca/IPM/images/potatoes/diseases/early-blight/potato_early-blight_08_zoom.jpg"
+      text: " අර්තාපල් මුල් අංගමාරය යනු දිලීර රෝගයක් වන අතර අර්තාපල් කොළ මත කුඩා තද දුඹුරු තුවාල ලෙස පහළ සිට ආරම්භ 
+      වී ඉහළට පැතිරෙයි. දිලීර ශාක සුන්බුන් සහ පසෙහි නොනැසී පවතින අතර සුළඟ හා වර්ෂාව හරහා පැතිරෙයි. උණුසුම් හා තෙතමනය 
+      සහිත තත්වයන් එහි වර්ධනය දිරිමත් කරයි."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: පූර්ව අංගමාරය
+      image: "https://omafra.gov.on.ca/IPM/images/potatoes/diseases/early-blight/potato_early-blight_08_zoom.jpg"
+      text: " අර්තාපල් මුල් අංගමාරය යනු දිලීර රෝගයක් වන අතර අර්තාපල් කොළ මත කුඩා තද දුඹුරු තුවාල ලෙස පහළ සිට ආරම්භ 
+      වී ඉහළට පැතිරෙයි. දිලීර ශාක සුන්බුන් සහ පසෙහි නොනැසී පවතින අතර සුළඟ හා වර්ෂාව හරහා පැතිරෙයි. උණුසුම් හා තෙතමනය 
+      සහිත තත්වයන් එහි වර්ධනය දිරිමත් කරයි."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: සහල් දුඹුරු පුල්ලි
+      image: "http://www.knowledgebank.irri.org/images/stories/brown-spot-3.jpg"
+      text: " සහල් දුඹුරු පැහැ ලප යනු 'කොක්ලියෝබොලස් මියාබීනස්' මගින් ඇති කරන දිලීර රෝගයකි. එය කොළ මත කහ හලෝස් 
+      සහිත කුඩා තද දුඹුරු සිට කළු තුවාල වලින් සංලක්ෂිත වේ. මෙම තුවාල එකට එකතු වී විශාල හානියක් සිදු විය හැක. අස්වැන්න 
+      අඩුවීමට හේතු විය හැකි අතර, එය සාමාන්‍යයෙන් වෙනත් සහල් රෝගවලට සාපේක්ෂව අඩු දරුණු රෝගයක් ලෙස සැලකේ."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: දුඹුරු පුල්ලි
+      image: "http://www.knowledgebank.irri.org/images/stories/brown-spot-3.jpg"
+      text: " සහල් දුඹුරු පැහැ ලප යනු 'කොක්ලියෝබොලස් මියාබීනස්' මගින් ඇති කරන දිලීර රෝගයකි. එය කොළ මත කහ හලෝස් 
+      සහිත කුඩා තද දුඹුරු සිට කළු තුවාල වලින් සංලක්ෂිත වේ. මෙම තුවාල එකට එකතු වී විශාල හානියක් සිදු විය හැක. අස්වැන්න 
+      අඩුවීමට හේතු විය හැකි අතර, එය සාමාන්‍යයෙන් වෙනත් සහල් රෝගවලට සාපේක්ෂව අඩු දරුණු රෝගයක් ලෙස සැලකේ."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: සහල් බැක්ටීරියා කොළ අංගමාරය
+      image: "https://apps.lucidcentral.org/pppw_v10/images/entities/rice_bacterial_leaf_blight_418/bacterialoozedry.jpg"
+      text: " සහල් බැක්ටීරියා කොළ අංගමාරය යනු බැක්ටීරියා රෝගයකි. එය කොළ මත කහට බලපෑමක් ඇති ජලයෙන් පොඟවා ඇති
+       තුවාල වර්ධනය වීම මගින් සංලක්ෂිත වේ. මෙම තුවාල බොහෝ විට අක්‍රමවත් හැඩයන් ඇති අතර ඒවා එකට එකතු වී සැලකිය යුතු හානියක් සිදු කරයි."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: බැක්ටීරියා කොළ අංගමාරය
+      image: "https://apps.lucidcentral.org/pppw_v10/images/entities/rice_bacterial_leaf_blight_418/bacterialoozedry.jpg"
+      text: " සහල් බැක්ටීරියා කොළ අංගමාරය යනු බැක්ටීරියා රෝගයකි. එය කොළ මත කහට බලපෑමක් ඇති ජලයෙන් පොඟවා ඇති
+       තුවාල වර්ධනය වීම මගින් සංලක්ෂිත වේ. මෙම තුවාල බොහෝ විට අක්‍රමවත් හැඩයන් ඇති අතර ඒවා එකට එකතු වී සැලකිය යුතු හානියක් සිදු කරයි."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: සහල් කොළ පාලුව
+      image: "https://www.agric.wa.gov.au/sites/gateway/files/leafblast.jpg"
+      text: " සහල් පිපිරීම යනු සහල් වල දිලීර රෝගයක් වන අතර එය ඕනෑම වර්ධන අවධියකදී ආසාදනය විය හැක. දිලීරය සහල් 
+      ශාකයේ පහත සඳහන් කොටස්වල තුවාල ඇති කරයි: පත්‍ර, පත්‍ර කරපටි. දරුණු කොළ පිපිරුම් ආසාදනයක් ඇති වුවහොත් ධාන්‍ය 
+      පිරවීම සඳහා අවශ්‍ය පත්‍ර ප්‍රදේශය අඩු කරයි සහා ධාන්‍ය අස්වැන්න අඩු කරයි."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: කොළ පාලුව
+      image: "https://www.agric.wa.gov.au/sites/gateway/files/leafblast.jpg"
+      text: " සහල් පිපිරීම යනු සහල් වල දිලීර රෝගයක් වන අතර එය ඕනෑම වර්ධන අවධියකදී ආසාදනය විය හැක. දිලීරය සහල් 
+      ශාකයේ පහත සඳහන් කොටස්වල තුවාල ඇති කරයි: පත්‍ර, පත්‍ර කරපටි. දරුණු කොළ පිපිරුම් ආසාදනයක් ඇති වුවහොත් ධාන්‍ය 
+      පිරවීම සඳහා අවශ්‍ය පත්‍ර ප්‍රදේශය අඩු කරයි සහා ධාන්‍ය අස්වැන්න අඩු කරයි."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: තේ කොළ පැල්ලම
+      image: "https://www.kisansuvidha.com/wp-content/uploads/2017/07/algal-leaf-spot-of-tea.jpg"
+      text: " ඇල්ගා නිසා ඇතිවන පත්‍ර ලප පැළවල බහුලව දක්නට ලැබෙන ගැටලුවකි. එය බොහෝ විට හඳුනාගනු ලබන්නේ එය තැඹිලි-දුඹුරු
+       මලකඩ පැහැති පත්‍ර ලප මගිනි. ආසාදිත පත්‍රවල යටි පැත්තේ සමහර ලප වාර්තා වී ඇතත්, මෙම ලප සාමාන්‍යයෙන් සම්පූර්ණයෙන්ම
+        ඉහළ පත්‍ර මතුපිට දක්නට ලැබේ."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: කොළ පැල්ලම
+      image: "https://www.kisansuvidha.com/wp-content/uploads/2017/07/algal-leaf-spot-of-tea.jpg"
+      text: " ඇල්ගා නිසා ඇතිවන පත්‍ර ලප පැළවල බහුලව දක්නට ලැබෙන ගැටලුවකි. එය බොහෝ විට හඳුනාගනු ලබන්නේ එය තැඹිලි-දුඹුරු
+       මලකඩ පැහැති පත්‍ර ලප මගිනි. ආසාදිත පත්‍රවල යටි පැත්තේ සමහර ලප වාර්තා වී ඇතත්, මෙම ලප සාමාන්‍යයෙන් සම්පූර්ණයෙන්ම
+        ඉහළ පත්‍ර මතුපිට දක්නට ලැබේ."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: තේ සුදු පැල්ලම
+      image: "https://apsjournals.apsnet.org/cms/10.1094/PDIS-09-20-1945-FE/asset/images/large/pdis-09-20-1945-fef6.jpeg"
+      text: " මෙම රෝගය තේ පැළවලට බලපාන දිලීර රෝගයකි. එය තේ කොළ මත කුඩා, සුදු හෝ ලා පැහැති ලප ලෙස විදහා දක්වයි. 
+      මෙම ලප ශාකයේ සමස්ත සෞඛ්‍යයට බලපෑම් කළ හැකි අතර තේවල ගුණාත්මක භාවයටද බලපා හැකිය."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: සුදු පැල්ලම
+      image: "https://apsjournals.apsnet.org/cms/10.1094/PDIS-09-20-1945-FE/asset/images/large/pdis-09-20-1945-fef6.jpeg"
+      text: " මෙම රෝගය තේ පැළවලට බලපාන දිලීර රෝගයකි. එය තේ කොළ මත කුඩා, සුදු හෝ ලා පැහැති ලප ලෙස විදහා දක්වයි. 
+      මෙම ලප ශාකයේ සමස්ත සෞඛ්‍යයට බලපෑම් කළ හැකි අතර තේවල ගුණාත්මක භාවයටද බලපා හැකිය."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: තේ අළු අංගමාරය
+      image: "https://www.lsuagcenter.com/~/media/system/e/0/5/3/e05374f8044e7dc49940239234224299/figure%205jpg.jpg?h=1136&la=en&w=2256"
+      text: " අළු අංගමාරය යනු තේ පැලවලට බලපාන දිලීර රෝගයකි. කුඩා, ඕවලාකාර, සුදුමැලි කහ-කොළ පැහැති ලප මුලින් තරුණ
+       තේ කොළ මත දිස් වේ. මෙම ලප බොහෝ විට පටු කහ කලාපයකින් වට වී ඇත. රෝගය වර්ධනය වන විට, පැල්ලම් දුඹුරු හෝ අළු
+        පැහැයක් ගනී, විසිරුණු කුඩා කළු තිත් සහිත සංකේන්ද්‍රික මුදු සාදයි. අවසානයේදී, බලපෑමට ලක් වූ පටක වියළී ගොස් පහත වැටීමට
+         හේතු දෙයි. ඕනෑම වයසක කොළ වලට මෙම රෝගය ඇතිවිය හැක."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: අළු අංගමාරය
+      image: "https://www.lsuagcenter.com/~/media/system/e/0/5/3/e05374f8044e7dc49940239234224299/figure%205jpg.jpg?h=1136&la=en&w=2256"
+      text: " අළු අංගමාරය යනු තේ පැලවලට බලපාන දිලීර රෝගයකි. කුඩා, ඕවලාකාර, සුදුමැලි කහ-කොළ පැහැති ලප මුලින් තරුණ
+       තේ කොළ මත දිස් වේ. මෙම ලප බොහෝ විට පටු කහ කලාපයකින් වට වී ඇත. රෝගය වර්ධනය වන විට, පැල්ලම් දුඹුරු හෝ අළු
+        පැහැයක් ගනී, විසිරුණු කුඩා කළු තිත් සහිත සංකේන්ද්‍රික මුදු සාදයි. අවසානයේදී, බලපෑමට ලක් වූ පටක වියළී ගොස් පහත වැටීමට
+         හේතු දෙයි. ඕනෑම වයසක කොළ වලට මෙම රෝගය ඇතිවිය හැක."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: තේ දුඹුරු අංගමාරය
+      image: "https://agritech.tnau.ac.in/crop_protection/images/tea_diseases/brown_blight_1.jpg"
+      text: " දුඹුරු අංගමාරය යනු තරුණ තේ දළු මත කුඩා, ඕවලාකාර, සුදුමැලි කහ-කොළ පැහැති ලප මගින් සංලක්ෂිත තේ රෝගයකි.
+       මෙම ලප අවසානයේ දුඹුරු හෝ අළු පැහැයට හැරෙන අතර කුඩා කළු තිත් සහිත කේන්ද්‍රීය වළලු සාදයි. බලපෑමට ලක් වූ පටක වියළී
+        හා වැටීම, දිරාපත් වීමට තුඩු දෙයි. තේ පැළ කෙරෙහි එහි බලපෑම අවම කිරීම සඳහා නිසි කළමනාකරණය අත්‍යවශ්‍ය වේ."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: දුඹුරු අංගමාරය
+      image: "https://agritech.tnau.ac.in/crop_protection/images/tea_diseases/brown_blight_1.jpg"
+      text: " දුඹුරු අංගමාරය යනු තරුණ තේ දළු මත කුඩා, ඕවලාකාර, සුදුමැලි කහ-කොළ පැහැති ලප මගින් සංලක්ෂිත තේ රෝගයකි.
+       මෙම ලප අවසානයේ දුඹුරු හෝ අළු පැහැයට හැරෙන අතර කුඩා කළු තිත් සහිත කේන්ද්‍රීය වළලු සාදයි. බලපෑමට ලක් වූ පටක වියළී
+        හා වැටීම, දිරාපත් වීමට තුඩු දෙයි. තේ පැළ කෙරෙහි එහි බලපෑම අවම කිරීම සඳහා නිසි කළමනාකරණය අත්‍යවශ්‍ය වේ."
+
+
+  utter_ask_preventive_measures_english:
+    - text: "Do you want to know about the preventive measures for this crop disease?"
+
+  utter_ask_preventive_measures_sinhala:
+    - text: "මෙම බෝග රෝගය වැළැක්වීමේ පියවර ගැන දැන ගැනීමට ඔබට අවශ්‍යද?"
+
+
+  utter_affirm_preventive_measures:
+    - text: "Please say 'yes' or 'no' \n කරුණාකර 'ඔව්' හෝ 'නැත' කියන්න"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: potato late blight
+      text: "\n- Crop rotation/Fallowing
+        \n - Start cultivation at correct time (Give the location and you will be able to check whether this is the correct time)
+        \n - Use resistant varieties – Carlous
+        \n - Use disease free tubers
+        \n - Application of Fungicides – Mancozeb, Maneb, Metalaxyl, Fluazinam"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: late blight
+      text: "\n- Crop rotation/Fallowing
+        \n - Start cultivation at correct time
+        \n - Use resistant varieties – Carlous
+        \n - Use disease free tubers
+        \n - Application of Fungicides – Mancozeb, Maneb, Metalaxyl, Fluazinam"
+
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: අර්තාපල් පශ්චිම අංගමාරය
+      text: "\n - නියමිත කාලයට වගා කිරීම
+        \n - ප්‍රතිරෝධී ප්‍රභේද වගා කිරීම
+        \n - නීරෝගී බීජ අර්තාපල් වගාවට යොදා ගැනීම</li>
+        \n - සොලනේසියේ කුලයට අයත් නොවන බෝග සමඟ බෝග මාරුව</li>
+        \n - වගා බිම වසර 3 ක් පමණ වගා නොකර තැබීම</li>
+        \n - නිර්දේශිත දිලීර නාශක භාවිතය - මැන්කොසෙබ් , මනෙබ් , මෙටල්ස්කිල් , ෆ්ලුසිනම්"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: පශ්චිම අංගමාරය
+      text: "\n - නියමිත කාලයට වගා කිරීම
+        \n - ප්‍රතිරෝධී ප්‍රභේද වගා කිරීම
+        \n - නීරෝගී බීජ අර්තාපල් වගාවට යොදා ගැනීම</li>
+        \n - සොලනේසියේ කුලයට අයත් නොවන බෝග සමඟ බෝග මාරුව</li>
+        \n - වගා බිම වසර 3 ක් පමණ වගා නොකර තැබීම</li>
+        \n - නිර්දේශිත දිලීර නාශක භාවිතය - මැන්කොසෙබ් , මනෙබ් , මෙටල්ස්කිල් , ෆ්ලුසිනම්"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: potato early blight
+      text: "\n - Crop rotation
+        \n - Application of fungicides – Mancozeb, Maneb"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: early blight
+      text: "\n - Crop rotation
+        \n - Application of fungicides – Mancozeb, Maneb"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: අර්තාපල් පූර්ව අංගමාරය
+      text: "\n - බෝග මාරු
+        \n - නිර්දේශිත දිලීර නාශක භාවිතය - Mancozeb, Maneb"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: පූර්ව අංගමාරය
+      text: "\n - බෝග මාරු
+        \n - නිර්දේශිත දිලීර නාශක භාවිතය - Mancozeb, Maneb"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: rice brown spot
+      text: "\n - Application of organic fertilizer
+        \n - Use of certified seed paddy free from the disease
+        \n - Addition of burnt paddy husk (250 kg per acre) to the soil during land preparation
+        \n - Abstain addition of disease infected straw
+        \n - Treatment of seed paddy by dipping in hot water (53-54 C) for 10-12 minutes
+        \n - Crop rotation
+        \n - Proper land leveling"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: brown spot
+      text: "\n - Application of organic fertilizer
+        \n - Use of certified seed paddy free from the disease
+        \n - Addition of burnt paddy husk (250 kg per acre) to the soil during land preparation
+        \n - Abstain addition of disease infected straw
+        \n - Treatment of seed paddy by dipping in hot water (53-54 C) for 10-12 minutes
+        \n - Crop rotation
+        \n - Proper land leveling"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: සහල් දුඹුරු පුල්ලි
+      text: "\n - කාබනික පොහොර යෙදීම
+        \n - රෝගවලින් තොර සහතික කළ වී භාවිතය
+        \n - ඉඩම් සැකසීමේදී පිළිස්සුණු වී ලෙල්ල (අක්කරයකට කි.ග්‍රෑම් 250) පසට එකතු කිරීම
+        \n - රෝග ආසාදිත පිදුරු එකතු කිරීමෙන් වළකින්න
+        \n - උණු වතුරේ (53-54 C) විනාඩි 10-12 ක් ගිල්වා බිත්තර වී ප්‍රතිකාර කිරීම
+        \n - බෝග මාරුව
+        \n - නිසි බිම් මට්ටම් කිරීම"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: දුඹුරු පුල්ලි
+      text: "\n - කාබනික පොහොර යෙදීම
+        \n - රෝගවලින් තොර සහතික කළ වී භාවිතය
+        \n - ඉඩම් සැකසීමේදී පිළිස්සුණු වී ලෙල්ල (අක්කරයකට කි.ග්‍රෑම් 250) පසට එකතු කිරීම
+        \n - රෝග ආසාදිත පිදුරු එකතු කිරීමෙන් වළකින්න
+        \n - උණු වතුරේ (53-54 C) විනාඩි 10-12 ක් ගිල්වා බිත්තර වී ප්‍රතිකාර කිරීම
+        \n - බෝග මාරුව
+        \n - නිසි බිම් මට්ටම් කිරීම"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: rice bacterial leaf blight
+      text: "\n - Application of urea in recommended dosages or application of urea based on leaf colour chart
+        \n - Stop water supply, and let the field dry
+        \n - When total removal of water is not possible, try to out-flow water through drainage ditches or water courses (wakkada)
+        \n - Water drained from the fields infected with disease should not be diverted through disease free fields as much as possible
+        \n - Once the disease is observed, application of potassium fertilizer could manage further spread of the disease"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: bacterial leaf blight
+      text: "\n - Application of urea in recommended dosages or application of urea based on leaf colour chart
+        \n - Stop water supply, and let the field dry
+        \n - When total removal of water is not possible, try to out-flow water through drainage ditches or water courses (wakkada)
+        \n - Water drained from the fields infected with disease should not be diverted through disease free fields as much as possible
+        \n - Once the disease is observed, application of potassium fertilizer could manage further spread of the disease"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: සහල් බැක්ටීරියා කොළ අංගමාරය
+      text: "\n - නිර්දේශිත මාත්‍රාවලින් යූරියා යෙදීම හෝ පත්‍ර වර්ණ සටහන මත පදනම්ව යූරියා යෙදීම
+        \n - ජල සැපයුම නතර කර, කෙත වියළීමට ඉඩ දෙන්න
+        \n - ජලය සම්පූර්ණයෙන් ඉවත් කිරීමට නොහැකි වූ විට, ජලාපවහන වළවල් හෝ ජල මාර්ග (වක්කඩ) හරහා ජලය පිටතට ගලා යාමට උත්සාහ කරන්න
+        \n - රෝග ආසාදිත කෙත්වලින් බැස යන ජලය හැකිතාක් රෝගවලින් තොර කෙත්වතු හරහා හරවා යැවීම නොකළ යුතුය
+        \n - රෝගය නිරීක්ෂණය කළ පසු පොටෑසියම් පොහොර යෙදීමෙන් රෝගය තවදුරටත් පැතිරීම පාලනය කළ හැකිය"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: බැක්ටීරියා කොළ අංගමාරය
+      text: "\n - නිර්දේශිත මාත්‍රාවලින් යූරියා යෙදීම හෝ පත්‍ර වර්ණ සටහන මත පදනම්ව යූරියා යෙදීම
+        \n - ජල සැපයුම නතර කර, කෙත වියළීමට ඉඩ දෙන්න
+        \n - ජලය සම්පූර්ණයෙන් ඉවත් කිරීමට නොහැකි වූ විට, ජලාපවහන වළවල් හෝ ජල මාර්ග (වක්කඩ) හරහා ජලය පිටතට ගලා යාමට උත්සාහ කරන්න
+        \n - රෝග ආසාදිත කෙත්වලින් බැස යන ජලය හැකිතාක් රෝගවලින් තොර කෙත්වතු හරහා හරවා යැවීම නොකළ යුතුය
+        \n - රෝගය නිරීක්ෂණය කළ පසු පොටෑසියම් පොහොර යෙදීමෙන් රෝගය තවදුරටත් පැතිරීම පාලනය කළ හැකිය"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: rice blast
+      text: "Within the crop season application of urea in recommended dosages or application of urea based on leaf 
+      colour chart. If the disease spread fast, following fungicides could be applied,
+      \n - Tebuconazole 250g/l EC – dissolve 10 ml in 16 l of water (8-10 tanks per acre)
+      \n - Isoprothiolane 400g/l EC – dissolve 20 ml in 16 l of water (8-10 tanks per acre) 
+      \n - Carbendazim 50% WP/WG – dissolve 11 g/ 11 ml in 16 l of water (8-10 tanks per acre)
+      \n - Tricyclazole 75 %WP – dissolve 10 g in 16 l of water (8-10 tanks per acre)
+      \n\nIf the crop is infected, following management options should be applied for the next season
+      \n - Use of resistant varieties (Bg 403, Bg 406, Bg 366, Bg 359, Bw 361, Bg 250)
+      \n - Use of certified seed paddy free from the disease 
+      \n - Addition of burnt paddy husk (250 kg per acre) to the soil during land preparation
+      \n - Abstain addition of disease infected straw"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: blast
+      text: "Within the crop season application of urea in recommended dosages or application of urea based on leaf 
+      colour chart. If the disease spread fast, following fungicides could be applied,
+      \n - Tebuconazole 250g/l EC – dissolve 10 ml in 16 l of water (8-10 tanks per acre)
+      \n - Isoprothiolane 400g/l EC – dissolve 20 ml in 16 l of water (8-10 tanks per acre) 
+      \n - Carbendazim 50% WP/WG – dissolve 11 g/ 11 ml in 16 l of water (8-10 tanks per acre)
+      \n - Tricyclazole 75 %WP – dissolve 10 g in 16 l of water (8-10 tanks per acre)
+      \n\nIf the crop is infected, following management options should be applied for the next season
+      \n - Use of resistant varieties (Bg 403, Bg 406, Bg 366, Bg 359, Bw 361, Bg 250)
+      \n - Use of certified seed paddy free from the disease 
+      \n - Addition of burnt paddy husk (250 kg per acre) to the soil during land preparation
+      \n - Abstain addition of disease infected straw"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: සහල් කොළ පාලුව
+      text: "බෝග කාලය තුළ නිර්දේශිත මාත්‍රාවලින් යූරියා යෙදීම. රෝගය වේගයෙන් පැතිර ගියහොත් පහත සඳහන් දිලීර නාශක යෙදිය හැක.
+       \n - Tebuconazole 250g/l EC – මිලි ලීටර් 10ක් වතුර ලීටර් 16ක දියකරන්න (අක්කරයකට ටැංකි 8-10)
+       \n - Isoprothiolane 400g/l EC – මිලි ලීටර් 20ක් ජලය ලීටර් 16ක දියකරන්න (අක්කරයකට ටැංකි 8-10) 
+       \n - Carbendazim 50% WP/WG - 11 g/ 11 ml ජලය ලීටර් 16 ක දියකර (අක්කරයකට ටැංකි 8-10)
+       \n - ට්‍රයිසයික්ලසෝල් 75 %WP - ග්‍රෑම් 10 ක් ජලය ලීටර් 16 ක දියකර (අක්කරයකට ටැංකි 8-10)
+      \n\n බෝගය ආසාදනය වී ඇත්නම්, ඊළඟ කන්නය සඳහා පහත කළමනාකරණ විකල්ප යෙදිය යුතුය
+       \n - ප්‍රතිරෝධී ප්‍රභේද භාවිතය (Bg 403, Bg 406, Bg 366, Bg 359, Bw 361, Bg 250)
+       \n - රෝගයෙන් තොර සහතික කළ බිත්තර වී භාවිතය
+       \n - ඉඩම් සැකසීමේදී පිළිස්සුණු වී ලෙල්ල (අක්කරයකට කි.ග්‍රෑම් 250) පසට එකතු කිරීම
+       \n - රෝග ආසාදිත පිදුරු එකතු කිරීමෙන් වළකින්න"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: කොළ පාලුව
+      text: "බෝග කාලය තුළ නිර්දේශිත මාත්‍රාවලින් යූරියා යෙදීම. රෝගය වේගයෙන් පැතිර ගියහොත් පහත සඳහන් දිලීර නාශක යෙදිය හැක.
+       \n - Tebuconazole 250g/l EC – මිලි ලීටර් 10ක් වතුර ලීටර් 16ක දියකරන්න (අක්කරයකට ටැංකි 8-10)
+       \n - Isoprothiolane 400g/l EC – මිලි ලීටර් 20ක් ජලය ලීටර් 16ක දියකරන්න (අක්කරයකට ටැංකි 8-10) 
+       \n - Carbendazim 50% WP/WG - 11 g/ 11 ml ජලය ලීටර් 16 ක දියකර (අක්කරයකට ටැංකි 8-10)
+       \n - ට්‍රයිසයික්ලසෝල් 75 %WP - ග්‍රෑම් 10 ක් ජලය ලීටර් 16 ක දියකර (අක්කරයකට ටැංකි 8-10)
+      \n\n බෝගය ආසාදනය වී ඇත්නම්, ඊළඟ කන්නය සඳහා පහත කළමනාකරණ විකල්ප යෙදිය යුතුය
+       \n - ප්‍රතිරෝධී ප්‍රභේද භාවිතය (Bg 403, Bg 406, Bg 366, Bg 359, Bw 361, Bg 250)
+       \n - රෝගයෙන් තොර සහතික කළ බිත්තර වී භාවිතය
+       \n - ඉඩම් සැකසීමේදී පිළිස්සුණු වී ලෙල්ල (අක්කරයකට කි.ග්‍රෑම් 250) පසට එකතු කිරීම
+       \n - රෝග ආසාදිත පිදුරු එකතු කිරීමෙන් වළකින්න"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: tea leaf spot
+      text: " - Ensure the plants are well taken care of and not under any undue stress, as this can make them more susceptible to diseases.
+      \n - Make sure the soil has good drainage.
+      \n - Promote good air circulation in the plant canopy to reduce humidity and the duration of leaf wetness, which can contribute to the spread of the disease.
+      \n - Removal of Infected Portions.
+      \n - Spraying of Bordeaux Mixture - Traditional fungicide that can be used to control leaf spot diseases.
+      \n - The nutrient status of the soil should be improved by the application of nitrogen, phosphorus, and potassium
+      \n - Avoid Overhead Watering - Overhead watering can spread the disease. Instead, use drip irrigation or water at the base of the plant
+      \n - Crop Rotation - Practice crop rotation to avoid planting the same species in the same location for at least 3 years"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: leaf spot
+      text: " - Ensure the plants are well taken care of and not under any undue stress, as this can make them more susceptible to diseases
+      \n - Make sure the soil has good drainage
+      \n - Promote good air circulation in the plant canopy to reduce humidity and the duration of leaf wetness, which can contribute to the spread of the disease
+      \n - Removal of Infected Portions
+      \n - Spraying of Bordeaux Mixture - Traditional fungicide that can be used to control leaf spot diseases
+      \n - The nutrient status of the soil should be improved by the application of nitrogen, phosphorus, and potassium
+      \n - Avoid Overhead Watering - Overhead watering can spread the disease. Instead, use drip irrigation or water at the base of the plant
+      \n - Crop Rotation - Practice crop rotation to avoid planting the same species in the same location for at least 3 years"
+
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: තේ කොළ පැල්ලම
+      text: " - ශාක හොඳින් රැකබලා ගන්නා බවටත් අනවශ්‍ය ආතතියකට ලක් නොවන බවටත් සහතික වන්න, නැතහොත්  රෝගවලට ගොදුරු විය හැකිය
+      \n - නිසි ජලාපවහනය - දුර්වල පාංශු ජලාපවහනය මගින් පත්‍ර මත ලප රෝග ඇතිවීමේ අවදානම වැඩි කරයි. ජලයෙන් යටවීම වැළැක්වීම සඳහා පසෙහි හොඳ ජලාපවහනය තිබිය යුතුය
+      \n - වායු සංසරණය - රෝගය පැතිරීමට දායක විය හැකි ආර්ද්‍රතාවය සහ පත්‍ර තෙත් කාලය අඩු කිරීම සඳහා ශාක වියන තුළ හොඳ වායු සංසරණයක් තිබිය යුතුය
+      \n - ආසාදිත කොටස් ඉවත් කිරීම - රෝගය පැතිරීම වැළැක්වීම සඳහා ශාකයේ ආසාදිත කොටස් ඉවත් කර විනාශ කළ යුතුය
+      \n - බෝඩෝ මිශ්‍රණය ඉසීම - මෙම රෝගය පාලනය කිරීමට භාවිතා කළ හැකි පාරම්පරික දිලීර නාශකයක්
+      \n - නයිට්‍රජන්, පොස්පරස් සහ පොටෑසියම් යෙදීමෙන් පසෙහි පෝෂක තත්ත්වය වැඩිදියුණු කළ යුතුය
+      \n - වැඩිපුර ජලය දැමීමෙන් වළකින්න - වැඩිපුර  ජලය දැමීම මගින් රෝගය පැතිර යා හැක. ඒ වෙනුවට, බිංදු වාරිමාර්ග ක්‍රමය හෝ ශාකයේ පාමුල ජලය භාවිතා කරන්න
+      \n - බෝග භ්‍රමණය - අවම වශයෙන් වසර 3ක් එකම ස්ථානයක එකම විශේෂයක් සිටුවීමෙන් වැළකීම සඳහා බෝග මාරුව සිදු කරන්න"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: කොළ පැල්ලම
+      text: " - ශාක හොඳින් රැකබලා ගන්නා බවටත් අනවශ්‍ය ආතතියකට ලක් නොවන බවටත් සහතික වන්න, නැතහොත්  රෝගවලට ගොදුරු විය හැකිය
+      \n - නිසි ජලාපවහනය - දුර්වල පාංශු ජලාපවහනය මගින් පත්‍ර මත ලප රෝග ඇතිවීමේ අවදානම වැඩි කරයි. ජලයෙන් යටවීම වැළැක්වීම සඳහා පසෙහි හොඳ ජලාපවහනය තිබිය යුතුය
+      \n - වායු සංසරණය - රෝගය පැතිරීමට දායක විය හැකි ආර්ද්‍රතාවය සහ පත්‍ර තෙත් කාලය අඩු කිරීම සඳහා ශාක වියන තුළ හොඳ වායු සංසරණයක් තිබිය යුතුය
+      \n - ආසාදිත කොටස් ඉවත් කිරීම - රෝගය පැතිරීම වැළැක්වීම සඳහා ශාකයේ ආසාදිත කොටස් ඉවත් කර විනාශ කළ යුතුය
+      \n - බෝඩෝ මිශ්‍රණය ඉසීම - මෙම රෝගය පාලනය කිරීමට භාවිතා කළ හැකි පාරම්පරික දිලීර නාශකයක්
+      \n - නයිට්‍රජන්, පොස්පරස් සහ පොටෑසියම් යෙදීමෙන් පසෙහි පෝෂක තත්ත්වය වැඩිදියුණු කළ යුතුය
+      \n - වැඩිපුර ජලය දැමීමෙන් වළකින්න - වැඩිපුර  ජලය දැමීම මගින් රෝගය පැතිර යා හැක. ඒ වෙනුවට, බිංදු වාරිමාර්ග ක්‍රමය හෝ ශාකයේ පාමුල ජලය භාවිතා කරන්න
+      \n - බෝග භ්‍රමණය - අවම වශයෙන් වසර 3ක් එකම ස්ථානයක එකම විශේෂයක් සිටුවීමෙන් වැළකීම සඳහා බෝග මාරුව සිදු කරන්න"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: tea grey blight
+      text: " - Avoid Plant Stress: Ensure the tea bushes are grown with adequate spacing to permit air circulation and reduce humidity and the duration of leaf wetness.
+      \n - Use of Fungicides: Spraying of Bordeaux mixture or Copper Oxy Chloride 0.1% during winter and summer seasons can help. However, overuse of chemical pesticides can cause phytotoxicity, residual effects, and fungicides resistance3.
+      \n - Pruning: Removal of affected leaves and shoots by pruning and destruction of the same have been recommended.
+      \n - Biological Control Measures: Beneficial microbial communities in the tea rhizosphere can be used for the control of tea grey blight. For example, the abundance of the fungi Trichoderma, Penicillium, and Gliocladiopsis and the bacteria Pseudomonas, Streptomyces, Bacillus, and Burkholderia were significantly increased in the conditioned soil.
+      \n - Use of Antimicrobials: Screening for effectiveness of a natural antimicrobial against this pathogen"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: tea grey blight
+      text: " - Avoid Plant Stress: Ensure the tea bushes are grown with adequate spacing to permit air circulation and reduce humidity and the duration of leaf wetness.
+      \n - Use of Fungicides: Spraying of Bordeaux mixture or Copper Oxy Chloride 0.1% during winter and summer seasons can help. However, overuse of chemical pesticides can cause phytotoxicity, residual effects, and fungicides resistance3.
+      \n - Pruning: Removal of affected leaves and shoots by pruning and destruction of the same have been recommended.
+      \n - Biological Control Measures: Beneficial microbial communities in the tea rhizosphere can be used for the control of tea grey blight. For example, the abundance of the fungi Trichoderma, Penicillium, and Gliocladiopsis and the bacteria Pseudomonas, Streptomyces, Bacillus, and Burkholderia were significantly increased in the conditioned soil.
+      \n - Use of Antimicrobials: Screening for effectiveness of a natural antimicrobial against this pathogen"
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: තේ අළු අංගමාරය
+      text: " - තේ පඳුරු වායු සංසරණයට ඉඩ සැලසීමට සහ ආර්ද්‍රතාවය සහ පත්‍ර තෙත්වන කාලය අඩු කිරීමට ප්‍රමාණවත් පරතරයකින් වගා කර ඇති බවට සහතික වන්න.
+       \n - දිලීර නාශක භාවිතය: ශීත සහ ගිම්හාන කාලවලදී බෝඩෝ මිශ්‍රණය හෝ තඹ ඔක්සි ක්ලෝරයිඩ් 0.1% ඉසීම උපකාරී වේ. කෙසේ වෙතත්, රසායනික පළිබෝධනාශක අධික ලෙස භාවිතා කිරීම ෆයිටොටොක්සිසිටි, අවශේෂ බලපෑම් සහ දිලීර නාශක ප්‍රතිරෝධය ඇති කරයි.
+       \n - කප්පාදු කිරීම
+       \n - ජීව විද්‍යාත්මක පාලන ක්‍රම: තේ රයිසෝස්පියර්හි ප්‍රයෝජනවත් ක්ෂුද්‍රජීවී ප්‍රජාවන් තේ අළු අංගමාරය පාලනය සඳහා භාවිතා කළ හැක. උදාහරණයක් ලෙස, ට්‍රයිකොඩර්මා, පෙනිසිලියම් සහ ග්ලියෝක්ලැඩියෝප්සිස් යන දිලීර වල බහුලත්වය සහ Pseudomonas, Streptomyces, Bacillus සහ Burkholderia යන බැක්ටීරියාව සමීකරණය කළ පසෙහි සැලකිය යුතු ලෙස වැඩි විය.
+       \n - ප්‍රති-ක්ෂුද්‍ර ජීවී නාශක භාවිතය: මෙම රෝග කාරකයට එරෙහිව ස්වභාවික ප්‍රති-ක්ෂුද්‍ර ජීවී නාශකයක සඵලතාවය පරීක්ෂා කිරීම සහ එහි ක්‍රියාකාරීත්වය හඳුනා ගැනීම."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: අළු අංගමාරය
+      text: " - තේ පඳුරු වායු සංසරණයට ඉඩ සැලසීමට සහ ආර්ද්‍රතාවය සහ පත්‍ර තෙත්වන කාලය අඩු කිරීමට ප්‍රමාණවත් පරතරයකින් වගා කර ඇති බවට සහතික වන්න.
+       \n - දිලීර නාශක භාවිතය: ශීත සහ ගිම්හාන කාලවලදී බෝඩෝ මිශ්‍රණය හෝ තඹ ඔක්සි ක්ලෝරයිඩ් 0.1% ඉසීම උපකාරී වේ. කෙසේ වෙතත්, රසායනික පළිබෝධනාශක අධික ලෙස භාවිතා කිරීම ෆයිටොටොක්සිසිටි, අවශේෂ බලපෑම් සහ දිලීර නාශක ප්‍රතිරෝධය ඇති කරයි.
+       \n - කප්පාදු කිරීම
+       \n - ජීව විද්‍යාත්මක පාලන ක්‍රම: තේ රයිසෝස්පියර්හි ප්‍රයෝජනවත් ක්ෂුද්‍රජීවී ප්‍රජාවන් තේ අළු අංගමාරය පාලනය සඳහා භාවිතා කළ හැක. උදාහරණයක් ලෙස, ට්‍රයිකොඩර්මා, පෙනිසිලියම් සහ ග්ලියෝක්ලැඩියෝප්සිස් යන දිලීර වල බහුලත්වය සහ Pseudomonas, Streptomyces, Bacillus සහ Burkholderia යන බැක්ටීරියාව සමීකරණය කළ පසෙහි සැලකිය යුතු ලෙස වැඩි විය.
+       \n - ප්‍රති-ක්ෂුද්‍ර ජීවී නාශක භාවිතය: මෙම රෝග කාරකයට එරෙහිව ස්වභාවික ප්‍රති-ක්ෂුද්‍ර ජීවී නාශකයක සඵලතාවය පරීක්ෂා කිරීම සහ එහි ක්‍රියාකාරීත්වය හඳුනා ගැනීම."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: tea white spot
+      text: " - Maintain good agricultural practices, including proper irrigation and fertilization, to ensure the overall health of the tea plants.
+      \n - Regular Inspection.
+      \n - Prune the tea bushes regularly to remove affected leaves and shoots.
+      \n - Use of Fungicides."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: white spot
+      text: " - Maintain good agricultural practices, including proper irrigation and fertilization, to ensure the overall health of the tea plants.
+      \n - Regular Inspection.
+      \n - Prune the tea bushes regularly to remove affected leaves and shoots.
+      \n - Use of Fungicides."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: තේ සුදු පැල්ලම
+      text: "- තේ පැලවල සමස්ත සෞඛ්‍යය සහතික කිරීම සඳහා නිසි වාරිමාර්ග සහ පොහොර යෙදීම ඇතුළු හොඳ කෘෂිකාර්මික පිළිවෙත් පවත්වා ගැනීම.
+       \n - නිතිපතා පරීක්ෂා කිරීම.
+       \n - බලපෑමට ලක් වූ කොළ සහ රිකිලි ඉවත් කිරීම සඳහා තේ පඳුරු නිතිපතා කප්පාදු කරන්න.
+       \n - දිලීර නාශක භාවිතය."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: සුදු පැල්ලම
+      text: "- තේ පැලවල සමස්ත සෞඛ්‍යය සහතික කිරීම සඳහා නිසි වාරිමාර්ග සහ පොහොර යෙදීම ඇතුළු හොඳ කෘෂිකාර්මික පිළිවෙත් පවත්වා ගැනීම.
+       \n - නිතිපතා පරීක්ෂා කිරීම.
+       \n - බලපෑමට ලක් වූ කොළ සහ රිකිලි ඉවත් කිරීම සඳහා තේ පඳුරු නිතිපතා කප්පාදු කරන්න.
+       \n - දිලීර නාශක භාවිතය."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: tea brown blight
+      text: " - Grow tea bushes with adequate spacing to permit air circulation and reduce humidity and the duration of leaf wetness.
+      \n - Spray Copper Oxy Chloride or Bordeaux mixture 0.1% during winter and summer seasons. 
+      \n - Pruning affected leaves and shoots.
+      \n - Consider using biocontrol agents immediately after tea pruning and at a young leaf stage to help control the disease."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: brown blight
+      text: " - Grow tea bushes with adequate spacing to permit air circulation and reduce humidity and the duration of leaf wetness.
+      \n - Spray Copper Oxy Chloride or Bordeaux mixture 0.1% during winter and summer seasons. 
+      \n - Pruning affected leaves and shoots.
+      \n - Consider using biocontrol agents immediately after tea pruning and at a young leaf stage to help control the disease."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: තේ දුඹුරු අංගමාරය
+      text: "- වාතය සංසරණයට ඉඩ සැලසීමට සහ ආර්ද්‍රතාවය සහ පත්‍ර තෙත්වන කාලය අඩු කිරීමට ප්‍රමාණවත් පරතරයක් ඇති තේ පඳුරු වගා කරන්න.
+       \n - ශීත සහ ගිම්හාන කාලවලදී තඹ ඔක්සි ක්ලෝරයිඩ් හෝ බෝඩෝ මිශ්‍රණය 0.1% ඉසින්න.
+       \n - බලපෑමට ලක් වූ කොළ සහ රිකිලි කප්පාදු කිරීම.
+       \n - තේ කප්පාදු කිරීමෙන් පසු සහ කොළ තරුණ අවධියේදී රෝගය පාලනය කිරීමට ජෛව පාලන කාරක භාවිතා කිරීම සලකා බලන්න."
+
+    - condition:
+        - type: slot
+          name: crop_disease
+          value: දුඹුරු අංගමාරය
+      text: "- වාතය සංසරණයට ඉඩ සැලසීමට සහ ආර්ද්‍රතාවය සහ පත්‍ර තෙත්වන කාලය අඩු කිරීමට ප්‍රමාණවත් පරතරයක් ඇති තේ පඳුරු වගා කරන්න.
+       \n - ශීත සහ ගිම්හාන කාලවලදී තඹ ඔක්සි ක්ලෝරයිඩ් හෝ බෝඩෝ මිශ්‍රණය 0.1% ඉසින්න.
+       \n - බලපෑමට ලක් වූ කොළ සහ රිකිලි කප්පාදු කිරීම.
+       \n - තේ කප්පාදු කිරීමෙන් පසු සහ කොළ තරුණ අවධියේදී රෝගය පාලනය කිරීමට ජෛව පාලන කාරක භාවිතා කිරීම සලකා බලන්න."
+
+  utter_ask_prevention_explanation_eng:
+    - text: "\nI hope this helped you. If there is anything you want to know about the above preventive measures I can help you..."
+
+  utter_ask_prevention_explanation_sin:
+    - text: "\nමෙය ඔබට උපකාර වූ බව මම බලාපොරොත්තු වෙමි. ඉහත රෝග නිවාරණ ක්‍රම පිළිබඳව ඔබට දැන ගැනීමට අවශ්‍ය යමක් ඇත්නම් මට ඔබට උපකාර කළ හැක..."
+
+  utter_crop_rotation_eng:
+    - text: "Crop rotation is a simple yet effective practice in gardening and farming. Here are the basic steps to do crop rotation:
+    \n  - List the crops you plan to grow: Make a list of all the crops you want to grow.
+    \n  - Create rotational groups: Group crops by family, planting arrangement, nutrient needs, timing, or other important qualities. For example, tomatoes, peppers, eggplant, and potatoes belong to the same botanical family, the nightshades (Solanaceae).
+    \n  - Plan your rotation: Ideally, rotate a vegetable (or vegetable family) so that it grows in a particular place once out of every 3 to 4 years. For instance, if you planted tomatoes in the same garden bed year after year, they’re more likely to be hit by the same pests or diseases that affected your tomato crop last year. So you’d want to plant them in a different bed in the following year.
+    \n  - Consider soil health and nutrients: The purpose of crop rotation is not only to avoid pest problems, but also to consider the soil health and the nutrients that different plants need from the soil.
+    \n  - Make a map of your farm or garden: This will help you keep track of where each crop family has been planted each year. "
+
+  utter_crop_rotation_sin:
+    - text: "බෝග භ්‍රමණය ගෙවතු වගාවේ සහ ගොවිතැනේදී සරල නමුත් ඵලදායී පිළිවෙතකි. බෝග භ්‍රමණය කිරීමේ මූලික පියවර මෙන්න:
+     \n - ඔබ වගා කිරීමට අදහස් කරන බෝග ලැයිස්තුගත කරන්න: ඔබට වගා කිරීමට අවශ්‍ය සියලුම බෝග ලැයිස්තුවක් සාදන්න.
+     \n - භ්‍රමණ කණ්ඩායම් සාදන්න: පවුල අනුව කාණ්ඩ බෝග, රෝපණ සැකැස්ම, පෝෂක අවශ්‍යතා, වේලාව හෝ වෙනත් වැදගත් ගුණාංග. නිදසුනක් වශයෙන්, තක්කාලි, ගම්මිරිස්, වම්බටු සහ අර්තාපල් එකම උද්භිද පවුලට අයත් වන නයිට්ෂේඩ් (සොලනේසියා) අයත් වේ.
+     \n - ඔබේ භ්‍රමණය සැලසුම් කරන්න: ඉතා මැනවින්, එළවළුවක් (හෝ එළවළු පවුලක්) කරකවන්න එවිට එය සෑම වසර 3 සිට 4 දක්වා වරක් යම් ස්ථානයක වර්ධනය වේ. නිදසුනක් වශයෙන්, ඔබ වසරින් වසර එකම වත්ත ඇඳෙහි තක්කාලි සිටුවන්නේ නම්, පසුගිය වසරේ ඔබේ තක්කාලි බෝගයට බලපෑ පළිබෝධ හෝ රෝග වලට ගොදුරු වීමේ වැඩි ඉඩක් ඇත. එබැවින් ඊළඟ වසරේ වෙනත් ඇඳක ඒවා සිටුවීමට ඔබට අවශ්ය වනු ඇත.
+     \n - පාංශු සෞඛ්‍යය සහ පෝෂ්‍ය පදාර්ථ සලකා බලන්න: බෝග භ්‍රමණයේ අරමුණ පළිබෝධ ගැටළු වළක්වා ගැනීම පමණක් නොව, පාංශු සෞඛ්‍යය සහ විවිධ ශාකවලට පසෙන් අවශ්‍ය පෝෂ්‍ය පදාර්ථ සලකා බැලීම ද වේ.
+     \n - ඔබේ ගොවිපළේ හෝ ගෙවත්තේ සිතියමක් සාදන්න: මෙය ඔබට එක් එක් බෝග පවුල සෑම වසරකම වගා කර ඇත්තේ කොතැනකදැයි සොයා බැලීමට උදවු කරයි."
+
+  utter_disease_free_tuber_en:
+    - text: "A “disease-free tuber” refers to a tuber, such as a potato, that is free from diseases. This is often 
+    achieved through careful cultivation practices and storage conditions. For instance, in the case of potatoes, 
+    disease-free plants can be produced using micropropagation by tissue culture. These in vitro derived disease-free 
+    plants are used to produce minitubers, which are the initial source of seed tuber multiplication program, under 
+    controlled greenhouse conditions. The goal is to prevent the spread of diseases that can affect the quality and 
+    yield of the crop."
+
+  utter_disease_free_tuber_sin:
+    - text: "“රෝග රහිත අල” යනු රෝගවලින් තොර අල වැනි අලයකටයි. මෙය බොහෝ විට
+     ප්‍රවේශමෙන් වගා පිළිවෙත් සහ ගබඩා තත්ත්වයන් තුළින් සාක්ෂාත් කරගනු ලැබේ. උදාහරණයක් ලෙස, අර්තාපල් සම්බන්ධයෙන්,
+     පටක වගාව මගින් ක්ෂුද්‍ර ප්‍රචාරණය මගින් රෝග වලින් තොර පැල නිපදවිය හැක. මේවා ව්‍යුත්පන්න වීට්‍රෝ රෝගයකින් තොරය
+     බීජ අල ගුණ කිරීමේ වැඩසටහනේ ආරම්භක මූලාශ්‍රය වන කුඩා බීජ නිපදවීමට ශාක යොදා ගනී.
+     පාලිත හරිතාගාර තත්ත්වයන්. ඉලක්කය වන්නේ ගුණාත්මක භාවයට බලපාන රෝග පැතිරීම වැළැක්වීමයි
+     බෝගයේ අස්වැන්න."
+
+
+  utter_ask_location_english:
+    - text: "Can you tell the city where you do your cultivation? This is for further assistance"
+
+  action_weather_api:
+    - text: ""
+
+  utter_deny_preventive_measures_en:
+    - text: "Early detection can help prevent the spread of diseases and minimize damage to your crops. Happy gardening!"
+
+  utter_deny_preventive_measures_sin:
+    - text: "රෝගය කලින් හඳුනා ගැනීමෙන් එය පැතිරීම වැලැක්වීමට සහ ඔබේ වගාවන්ට වන හානිය අවම කර ගත හැක. සුභ ගෙවතු වගාවක්!"
+
+  action_custom_fallback:
+    - text: ""
+

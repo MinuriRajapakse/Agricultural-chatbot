@@ -1,0 +1,244 @@
+version: "3.1"
+
+nlu:
+  - intent: affirm_english
+    examples: |
+      - yes
+      - yah
+      - y
+      - yeah
+      - yup
+      - yap
+      - yaa
+
+  - intent: affirm_sinhala
+    examples: |
+      - owu
+      - ha
+      - daanna
+      - ඔව්
+      - දාන්න
+      - හා
+
+  - intent: deny_english
+    examples: |
+      - no
+      - nop
+      - nah
+      - noh
+      - no need
+      - dont
+      - bye
+      - thank you
+      - thanks
+      - thanku
+      - thank uu
+      - bye bye
+
+  - intent: deny_sinhala
+    examples: |
+      - epah
+      - epa
+      - epo
+      - apa
+      - ona na
+      - na
+      - එපා
+      - එපෝ
+      - ඕන නෑ
+      - ඕන නැ
+      - ඇති
+      - ස්තුති
+      - නැත
+
+  - intent: p_late_blight_en
+    examples: |
+      - [potato late blight](crop_disease)
+      - [late blight](crop_disease)
+
+  - intent: p_late_blight_sin
+    examples: |
+      - [අර්තාපල් පශ්චිම අංගමාරය](crop_disease)
+      - [පශ්චිම අංගමාරය](crop_disease)
+
+  - intent: p_early_blight_en
+    examples: |
+      - [potato early blight](crop_disease)
+      - [early blight](crop_disease)
+
+  - intent: p_early_blight_sin
+    examples: |
+      - [අර්තාපල් පූර්ව අංගමාරය](crop_disease)
+      - [පූර්ව අංගමාරය](crop_disease)
+
+  - intent: r_brown_spot_en
+    examples: |
+      - [rice brown spot](crop_disease)
+      - [brown spot](crop_disease)
+
+  - intent: r_brown_spot_sin
+    examples: |
+      - [සහල් දුඹුරු පුල්ලි](crop_disease)
+      - [දුඹුරු පුල්ලි](crop_disease)
+      
+  - intent: r_bacterial_blight_en
+    examples: |
+      - [rice bacterial leaf blight](crop_disease)
+      - [bacterial leaf blight](crop_disease)
+
+  - intent: r_bacterial_blight_sin
+    examples: |
+      - [සහල් බැක්ටීරියා කොළ අංගමාරය](crop_disease)
+      - [බැක්ටීරියා කොළ අංගමාරය](crop_disease)
+
+  - intent: r_blast_en
+    examples: |
+      - [rice blast](crop_disease)
+      - [blast](crop_disease)
+
+  - intent: r_blast_sin
+    examples: |
+      - [කොළ පාලුව](crop_disease)
+      - [සහල් කොළ පාලුව](crop_disease)
+
+  - intent: t_leaf_spot_en
+    examples: |
+      - [tea leaf spot](crop_disease)
+      - [leaf spot](crop_disease)
+
+  - intent: t_leaf_spot_sin
+    examples: |
+      - [තේ කොළ පැල්ලම](crop_disease)
+      - [කොළ පැල්ලම](crop_disease)
+
+  - intent: t_grey_blight_en
+    examples: |
+      - [tea grey blight](crop_disease)
+      - [grey blight](crop_disease)
+
+  - intent: t_grey_blight_sin
+    examples: |
+      - [තේ අළු අංගමාරය](crop_disease)
+      - [අළු අංගමාරය](crop_disease)
+
+  - intent: t_white_spot_en
+    examples: |
+      - [tea white spot](crop_disease)
+      - [white spot](crop_disease)
+
+  - intent: t_white_spot_sin
+    examples: |
+      - [තේ සුදු පැල්ලම](crop_disease)
+      - [සුදු පැල්ලම](crop_disease)
+
+  - intent: t_brown_blight_en
+    examples: |
+      - [tea brown blight](crop_disease)
+      - [brown blight](crop_disease)
+
+  - intent: t_brown_blight_sin
+    examples: |
+      - [තේ දුඹුරු අංගමාරය](crop_disease)
+      - [දුඹුරු අංගමාරය](crop_disease)
+
+  - intent: start
+    examples: |
+      - hi
+      - hello
+
+  - intent: prefer_language
+    examples: |
+      - [english](user_prefer_language)
+      - [ඉංග්‍රීසි](user_prefer_language)
+      - [sinhala](user_prefer_language)
+      - [සිංහල](user_prefer_language)
+
+  - intent: crop_rotation_en
+    examples: |
+      - What is crop rotation?
+      - crop rotation?
+      - crop rotate
+      - crop rotatio
+      - how to do crop rotation
+
+  - intent: crop_rotation_sin
+    examples: |
+      - බෝග භ්‍රමණය යනු කුමක්ද?
+      - බෝග භ්‍රමණය?
+      - බෝග භ්‍රමණ
+      - බෝග භ්‍රම
+      - බෝග භ්‍රමණය කරන්නේ කෙසේද?
+
+  - intent: disease_free_tuber_en
+    examples: |
+      - What is disease free tuber?
+      - disease free tuber?
+      - diseese free tuber
+      - disease freee tuber
+
+  - intent: disease_free_tuber_sin
+    examples: |
+      - රෝග රහිත අල යනු කුමක්ද?
+      - රෝග රහිත අල?
+      - රෝග රහිත අල කුමක්ද?
+      - රෝග රහිත අල යනු
+
+  - intent: city
+    examples: |
+      - colombo
+      - කොළඹ
+      - ja-ela
+      - ampara
+      - kelaniya
+      - matara
+      - ragama
+      - Akkaraipattu
+      - Ampara
+      - Anuradhapura
+      - Badulla
+      - Balangoda
+      - Bandarawela
+      - Batticaloa
+      - Chavakachcheri
+      - Chilaw
+      - Colombo
+      - Dambulla
+      - Dehiwela-Mount Lavinia
+      - Embilipitiya
+      - Eravur
+      - Galle
+      - Gampaha
+      - Gampola
+      - Hambantota
+      - Happutalle
+      - Homagama
+      - Jaffna
+      - Kalmunai
+      - Kalutara
+      - Kandy
+      - Kattankudy
+      - Kegalle
+      - Kinniya
+      - Kurunegala
+      - Kuliyapitiya
+      - Mahiyanganaya
+      - Mannar
+      - Matale
+      - Matara
+      - Mawathagama
+      - Mihintale
+      - Monaragala
+      - Mulleriyawa
+      - Negombo
+      - Nuwara Eliya
+      - Padukka
+      - Puttalam
+      - Polonnaruwa
+      - Point Pedro
+      - Ratnapura
+      - Sri Jayewardenepura Kotte
+      - Thambiluvil
+      - Trincomalee
+      - Valvettithurai
+      - Vavuniya
+      - Vijitapura
