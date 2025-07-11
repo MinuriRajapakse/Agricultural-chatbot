@@ -1,4 +1,4 @@
-# 🌾 Agriculture Chatbot for Crop Disease Detection
+# 🌾 Agriculture Chatbot for Crop Disease Prevention
 
 An AI-powered chatbot system built using the **RASA framework**, designed to assist farmers by providing preventive suggestions for specific crop diseases. 
 ---
